@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+<persistence-unit name="$objectdb/db/p2.odb">
+ <description>My Persistence Unit</description>
+ <provider>com.objectdb.jpa.Provider</provider>
+ <class> </class>
+ <properties>
+ <property name="javax.persistence.jdbc.url" value="C:\Users\Rodrigo\bd2.odb">
+ <property name="javax.persistence.jdbc.user" value="admin">
+ <property name="javax.persistence.jdbc.password" value="admin">
+ </property></property></property></properties>
+</persistence-unit></persistence><!--comment-->
