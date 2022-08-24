@@ -27,13 +27,11 @@ public class ServicioCliente implements ClienteService{
 			
 			TypedQuery<Cliente> q = em.createQuery("select c from Cliente c where c.dni="+ dni, Cliente.class);
 			clientes = q.getResultList();
-			if (clientes.isEmpty())
-			{
-				Cliente cliente = new Cliente(Integer.valueOf(dni), nombre, apellido, email);
-				em.persist(cliente);
-			}
-			else
+			if (!clientes.isEmpty())
 				throw new RuntimeException("El dni del cliente ya se encuentra registrado");
+		
+			Cliente cliente = new Cliente(Integer.valueOf(dni), nombre, apellido, email);
+			em.persist(cliente);
 			
 			tx.commit();
 			} catch (Exception e) {
@@ -53,16 +51,14 @@ public class ServicioCliente implements ClienteService{
 		try {
 			tx.begin();
 			
-			if(this.clienteExiste(idCliente))
-			{
-				Cliente cliente = em.getReference(Cliente.class, idCliente);
-				cliente.setNombre(nombre);
-				cliente.setDni(Integer.valueOf(dni));
-				cliente.setApellido(apellido);
-				cliente.setEmail(email);
-			}
-			else
+			if(!this.clienteExiste(idCliente))
 				throw new RuntimeException("El cliente no se encuentra registrado");
+			
+			Cliente cliente = em.getReference(Cliente.class, idCliente);
+			cliente.setNombre(nombre);
+			cliente.setDni(Integer.valueOf(dni));
+			cliente.setApellido(apellido);
+			cliente.setEmail(email);
 			
 			tx.commit();
 			} catch (Exception e) {
@@ -82,13 +78,11 @@ public class ServicioCliente implements ClienteService{
 		try {
 			tx.begin();
 			
-			if(this.clienteExiste(idCliente))
-			{
-				Cliente cliente = em.getReference(Cliente.class, idCliente);
-				cliente.agregarTarjeta(new TarjetaDeCredito(Integer.valueOf(nro), marca));
-			}
-			else
+			if(!this.clienteExiste(idCliente))
 				throw new RuntimeException("El cliente no se encuentra registrado");
+				
+			Cliente cliente = em.getReference(Cliente.class, idCliente);
+			cliente.agregarTarjeta(new TarjetaDeCredito(Integer.valueOf(nro), marca));
 			
 			tx.commit();
 			} catch (Exception e) {
@@ -135,9 +129,8 @@ public class ServicioCliente implements ClienteService{
 			TypedQuery<Cliente> q = em.createQuery("select c from Cliente c where c.id="+ idCliente, Cliente.class);
 			clientes = q.getResultList();
 			
-			if(!clientes.isEmpty()) {
+			if(!clientes.isEmpty())
 				existe = true;
-			}
 			
 			tx.commit();
 			} catch (Exception e) {

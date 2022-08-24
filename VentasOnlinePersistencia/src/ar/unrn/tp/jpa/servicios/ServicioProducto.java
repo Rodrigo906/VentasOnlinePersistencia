@@ -23,13 +23,11 @@ public class ServicioProducto implements ProductoService{
 		try {
 			tx.begin();
 			
-			if(!this.productoExiste(codigo))
-			{
-				Producto p = new Producto(codigo, descripcion, categoria, marca, precio);
-				em.persist(p);
-			}
-			else
-				throw new RuntimeException("El producto ya se encuentra registrado");
+			if(this.productoExiste(codigo))
+				throw new RuntimeException("El producto ya se encuentra registrado");	
+			
+			Producto p = new Producto(codigo, descripcion, categoria, marca, precio);
+			em.persist(p);
 			
 			tx.commit();
 			} catch (Exception e) {
@@ -49,17 +47,15 @@ public class ServicioProducto implements ProductoService{
 		try {
 			tx.begin();
 			
-			if(this.productoExiste(idProducto))
-			{
-				Producto p = em.getReference(Producto.class, idProducto);
-				p.setCodigo(codigo);
-				p.setDescripcion(descripcion);
-				p.setPrecio(precio);
-				p.setCategoria(categoria);
-				p.setMarca(marca);
-			}
-			else
+			if(!this.productoExiste(idProducto))
 				throw new RuntimeException("El producto no se encuentra registrado");
+	
+			Producto p = em.getReference(Producto.class, idProducto);
+			p.setCodigo(codigo);
+			p.setDescripcion(descripcion);
+			p.setPrecio(precio);
+			p.setCategoria(categoria);
+			p.setMarca(marca);
 			
 			tx.commit();
 			} catch (Exception e) {
@@ -106,9 +102,8 @@ public class ServicioProducto implements ProductoService{
 			TypedQuery<Producto> q = em.createQuery("select p from Producto p where p.id="+ idProducto, Producto.class);
 			productos = q.getResultList();
 			
-			if(!productos.isEmpty()) {
+			if(!productos.isEmpty())
 				existe = true;
-			}
 			
 			tx.commit();
 			} catch (Exception e) {
@@ -133,9 +128,8 @@ public class ServicioProducto implements ProductoService{
 			TypedQuery<Producto> q = em.createQuery("select p from Producto p where p.codigo="+ codigo, Producto.class);
 			productos = q.getResultList();
 			
-			if(!productos.isEmpty()) {
+			if(!productos.isEmpty())
 				existe = true;
-			}
 			
 			tx.commit();
 			} catch (Exception e) {

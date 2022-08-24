@@ -1,6 +1,7 @@
 package ar.unrn.tp.api;
 
 import java.util.List;
+import java.util.Map;
 
 import ar.unrn.tp.modelo.Venta;
 
@@ -11,11 +12,11 @@ public interface VentaService {
 	// - debe ser un cliente existente
 	// - la lista de productos no debe estar vacía
 	 // - La tarjeta debe pertenecer al cliente
-	void realizarVenta(Long idCliente, List<Long> productos, Long idTarjeta);
+	void realizarVenta(Long idCliente, Map<Long, Integer> productos, Long idTarjeta);
 	
 	//Devuelve el monto total aplicando los descuentos al día de la fecha
 	 // validar que no llegue una lista vacía y la tarjeta exista
-	float calcularMonto(List<Long> productos, Long idTarjeta);
+	float calcularMonto(Map<Long, Integer> productos, Long idTarjeta);
 	
 	 //Devuelve todas las ventas realizadas
 	 List<Venta> ventas(); 

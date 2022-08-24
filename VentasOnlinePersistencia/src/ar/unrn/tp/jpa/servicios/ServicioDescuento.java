@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import ar.unrn.tp.api.DescuentoService;
 import ar.unrn.tp.modelo.GestorPromociones;
@@ -23,8 +24,11 @@ public class ServicioDescuento implements DescuentoService{
 		try {
 			tx.begin();
 			
-			PromocionDeCompra pc = new PromocionDeCompra(fechaDesde, fechaHasta, marcaTarjeta, porcentaje);
-			em.persist(pc);
+			TypedQuery<GestorPromociones> q = em.createQuery("select g from GestorPromociones g", GestorPromociones.class);
+			GestorPromociones gestor = q.getSingleResult();
+			
+			gestor.agregarPromocionCompra(new PromocionDeCompra(fechaDesde, fechaHasta, marcaTarjeta, porcentaje));
+			em.persist(gestor);
 
 			tx.commit();
 			} catch (Exception e) {
@@ -44,8 +48,11 @@ public class ServicioDescuento implements DescuentoService{
 		try {
 			tx.begin();
 			
-			PromocionDeProducto pp = new PromocionDeProducto(fechaDesde, fechaHasta, marcaProducto, porcentaje);
-			em.persist(pp);
+			TypedQuery<GestorPromociones> q = em.createQuery("select g from GestorPromociones g", GestorPromociones.class);
+			GestorPromociones gestor = q.getSingleResult();
+			
+			gestor.agregarPromocionProducto(new PromocionDeProducto(fechaDesde, fechaHasta, marcaProducto, porcentaje));
+			em.persist(gestor);
 
 			tx.commit();
 			} catch (Exception e) {
