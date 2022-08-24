@@ -13,7 +13,7 @@ public class PromocionDeProducto extends Promocion{
 		this.marcaProducto = marcaProducto;
 	}
 	
-	public double aplicarDescuento(double monto)
+	public float aplicarDescuento(float monto)
 	{
 		return monto - monto * this.getPorcentajeDescuento();
 	}

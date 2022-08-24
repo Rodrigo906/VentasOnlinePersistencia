@@ -26,7 +26,7 @@ public class ProductoSeleccionado {
 		this.cantidad = cantidad;
 	}
 	
-	public double calcularPrecio() {
+	public float calcularPrecio() {
 		return this.producto.getPrecio() * this.cantidad;
 	}
 

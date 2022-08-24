@@ -43,7 +43,7 @@ public abstract class Promocion {
 		this.diaHasta = diaHasta;
 	}
 	
-	public abstract double aplicarDescuento(double monto);
+	public abstract float aplicarDescuento(float monto);
 	
 	public abstract boolean tieneDescuento(String marca);
 

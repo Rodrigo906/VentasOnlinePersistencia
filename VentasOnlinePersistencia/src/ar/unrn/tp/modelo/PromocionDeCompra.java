@@ -14,7 +14,7 @@ public class PromocionDeCompra extends Promocion{
 	}
 	
 	@Override
-	public double aplicarDescuento(double monto) {
+	public float aplicarDescuento(float monto) {
 		return monto - monto * this.getPorcentajeDescuento();
 	}
 

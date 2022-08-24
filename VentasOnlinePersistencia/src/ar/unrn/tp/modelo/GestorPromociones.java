@@ -44,9 +44,9 @@ public class GestorPromociones {
 		return false;
 	}
 	
-	public double aplicarDescuentoDeProducto(List<ProductoSeleccionado> listaProductos) {
-		double montoTotal = 0;
-		double precioProductos = 0;
+	public float aplicarDescuentoDeProducto(List<ProductoSeleccionado> listaProductos) {
+		float montoTotal = 0;
+		float precioProductos = 0;
 		for(ProductoSeleccionado ps : listaProductos) {
 			//Por toda la cantidad de productos del mismo tipo comprados
 			precioProductos = ps.calcularPrecio();
@@ -62,7 +62,7 @@ public class GestorPromociones {
 		return montoTotal;
 	}
 	
-	public double aplicarDescuentoCompra(double monto, String tarjeta) {
+	public float aplicarDescuentoCompra(float monto, String tarjeta) {
 		for (Promocion promo : this.promocionesCompra) {
 			if (promo.tieneDescuento(tarjeta))
 				monto = promo.aplicarDescuento(monto);
@@ -70,8 +70,8 @@ public class GestorPromociones {
 	return monto;
 	}
 	
-	public double calcularMontoTotal(String tarjeta, List<ProductoSeleccionado> productos) {
-		double montoTotal = this.aplicarDescuentoDeProducto(productos);
+	public float calcularMontoTotal(String tarjeta, List<ProductoSeleccionado> productos) {
+		float montoTotal = this.aplicarDescuentoDeProducto(productos);
 		montoTotal = this.aplicarDescuentoCompra(montoTotal, tarjeta);
 		return montoTotal;
 	}

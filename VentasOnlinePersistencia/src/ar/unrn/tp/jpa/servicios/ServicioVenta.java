@@ -73,7 +73,7 @@ public class ServicioVenta implements VentaService{
 				Producto p = em.getReference(Producto.class, entry.getKey());
 				productosSeleccionados.add(new ProductoSeleccionado(p, entry.getValue()));
 			}
-			gestor.calcularMontoTotal(tarjeta.getMarca(), productosSeleccionados);
+			montoTotal = gestor.calcularMontoTotal(tarjeta.getMarca(), productosSeleccionados);
 			
 			tx.commit();
 			} catch (Exception e) {
