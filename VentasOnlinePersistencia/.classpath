@@ -7,11 +7,13 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="C:/Users/Rodrigo/Desktop/4° año/Segundo cuatrimestre/BD 2/Persistencia Orientada a Objetos/OBJETdb/objectdb-2.8.7.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Rodrigo/Desktop/4° año/Segundo cuatrimestre/BD 2/Persistencia Orientada a Objetos/OBJETdb/objectdb-2.8.7/bin/converter.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Rodrigo/Desktop/4° año/Segundo cuatrimestre/BD 2/Persistencia Orientada a Objetos/OBJETdb/objectdb-2.8.7/bin/explorer.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Rodrigo/Desktop/4° año/Segundo cuatrimestre/BD 2/Persistencia Orientada a Objetos/OBJETdb/objectdb-2.8.7/bin/objectdb.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Rodrigo/Desktop/4° año/Segundo cuatrimestre/BD 2/Persistencia Orientada a Objetos/OBJETdb/objectdb-2.8.7/bin/objectdb-jee.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Rodrigo/Desktop/4° año/Segundo cuatrimestre/BD 2/Persistencia Orientada a Objetos/OBJETdb/objectdb-2.8.7"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
