@@ -1,7 +1,14 @@
 package ar.unrn.tp.modelo;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
 public class ProductoComprado {
 
+	@Id
+	@GeneratedValue
+	private long id;
 	private String codigo;
 	private String descripcion;
 	private float precio;

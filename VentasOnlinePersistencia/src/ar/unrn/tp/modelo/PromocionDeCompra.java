@@ -3,6 +3,9 @@ package ar.unrn.tp.modelo;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.persistence.Entity;
+
+@Entity
 public class PromocionDeCompra extends Promocion{
 
 	private String marcaTarjeta;

@@ -4,9 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class GestorPromociones {
 
+	@Id
+	@GeneratedValue
+	private long id;
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Promocion> promocionesProducto;
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Promocion> promocionesCompra;
 	
 	public GestorPromociones() {

@@ -18,6 +18,7 @@ public class Cliente {
 	private String nombre;
 	private String apellido;
 	private String email;
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<TarjetaDeCredito> tarjetas;
 
 	

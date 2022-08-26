@@ -3,8 +3,16 @@ package ar.unrn.tp.modelo;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public abstract class Promocion {
 	
+	@Id
+	@GeneratedValue
+	private long id;
 	private Date diaDesde;
 	private Date diaHasta;
 	private float porcentajeDescuento;

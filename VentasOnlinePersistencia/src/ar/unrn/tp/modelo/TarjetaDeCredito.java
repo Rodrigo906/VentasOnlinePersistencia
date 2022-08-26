@@ -1,9 +1,14 @@
 package ar.unrn.tp.modelo;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-@Embeddable
+@Entity
 public class TarjetaDeCredito {
+	@Id
+	@GeneratedValue
+	private long id;
 	private int numero;
 	private String marca;
 	
@@ -27,6 +32,12 @@ public class TarjetaDeCredito {
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
+
+	@Override
+	public String toString() {
+		return "TarjetaDeCredito [numero=" + numero + ", marca=" + marca + "]";
+	}
+	
 	
 	
 

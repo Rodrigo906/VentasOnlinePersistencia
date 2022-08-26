@@ -2,9 +2,11 @@ package ar.unrn.tp.modelo;
 
 import java.time.LocalDate;
 import java.util.Date;
+import javax.persistence.Entity;
 
+@Entity
 public class PromocionDeProducto extends Promocion{
-
+	
 	private String marcaProducto;
 	
 	public PromocionDeProducto(LocalDate diaDesde, LocalDate diaHasta, String marcaProducto, float porcentajeDescuento) 

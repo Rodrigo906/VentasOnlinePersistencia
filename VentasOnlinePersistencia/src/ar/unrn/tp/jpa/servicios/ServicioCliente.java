@@ -99,12 +99,14 @@ public class ServicioCliente implements ClienteService{
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		List<TarjetaDeCredito> tarjetas = null;
+		List<TarjetaDeCredito> tarjetas = new ArrayList<TarjetaDeCredito>();
 		try {
 			tx.begin();
 			
 			Cliente cliente = em.getReference(Cliente.class, idCliente);
 			tarjetas = cliente.obtenerTarjetas();
+			//Porque solo retorna los valores si se ejecuta size??
+			System.out.println(tarjetas.size());
 			
 			tx.commit();
 			} catch (Exception e) {
