@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 
 import ar.unrn.tp.api.DescuentoService;
 import ar.unrn.tp.modelo.GestorPromociones;
@@ -24,12 +23,12 @@ public class ServicioDescuento implements DescuentoService{
 		try {
 			tx.begin();
 			
-			TypedQuery<GestorPromociones> q = em.createQuery("select g from GestorPromociones g", GestorPromociones.class);
-			GestorPromociones gestor = q.getSingleResult();
+			GestorPromociones gestor = em.getReference(GestorPromociones.class, 8l);
 			
-			gestor.agregarPromocionCompra(new PromocionDeCompra(fechaDesde, fechaHasta, marcaTarjeta, porcentaje));
-			em.persist(gestor);
-
+			boolean seAgrego = gestor.agregarPromocionCompra(new PromocionDeCompra(fechaDesde, fechaHasta, marcaTarjeta, porcentaje));
+			if(!seAgrego)
+				throw new RuntimeException("No se pudo agregar la promocion");
+					
 			tx.commit();
 			} catch (Exception e) {
 				tx.rollback();
@@ -48,10 +47,29 @@ public class ServicioDescuento implements DescuentoService{
 		try {
 			tx.begin();
 			
-			TypedQuery<GestorPromociones> q = em.createQuery("select g from GestorPromociones g", GestorPromociones.class);
-			GestorPromociones gestor = q.getSingleResult();
+			GestorPromociones gestor = em.find(GestorPromociones.class, 8l);
+			boolean seAgrego = gestor.agregarPromocionProducto(new PromocionDeProducto(fechaDesde, fechaHasta, marcaProducto, porcentaje));
+			if(!seAgrego)
+				throw new RuntimeException("No se pudo agregar la promocion");
+
+			tx.commit();
+			} catch (Exception e) {
+				tx.rollback();
+				throw new RuntimeException(e);
+			} finally {
+				if (em != null && em.isOpen())
+				 em.close();
+			}
+	}
+	
+	public void crearGestor() {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
 			
-			gestor.agregarPromocionProducto(new PromocionDeProducto(fechaDesde, fechaHasta, marcaProducto, porcentaje));
+			GestorPromociones gestor = new GestorPromociones();
 			em.persist(gestor);
 
 			tx.commit();

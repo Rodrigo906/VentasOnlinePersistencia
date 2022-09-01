@@ -103,10 +103,8 @@ public class ServicioCliente implements ClienteService{
 		try {
 			tx.begin();
 			
-			Cliente cliente = em.getReference(Cliente.class, idCliente);
+			Cliente cliente = em.find(Cliente.class, idCliente);
 			tarjetas = cliente.obtenerTarjetas();
-			//Porque solo retorna los valores si se ejecuta size??
-			System.out.println(tarjetas.size());
 			
 			tx.commit();
 			} catch (Exception e) {

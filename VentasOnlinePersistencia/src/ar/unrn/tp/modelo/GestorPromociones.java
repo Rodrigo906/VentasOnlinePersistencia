@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -39,7 +40,7 @@ public class GestorPromociones {
 	
 	public boolean agregarPromocionCompra(Promocion promo) {
 		if (this.promoExiste(promo, this.promocionesCompra))
-			throw new RuntimeException("Ya existe una promocione vigente para esta tarjeta");
+			throw new RuntimeException("Ya existe una promocion vigente para esta tarjeta");
 		
 		return this.promocionesCompra.add(promo);
 	}

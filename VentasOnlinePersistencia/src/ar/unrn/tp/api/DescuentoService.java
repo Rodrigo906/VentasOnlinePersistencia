@@ -11,4 +11,6 @@ public interface DescuentoService {
 	 // validar que las fechas no se superpongan
 	void crearDescuento(String marcaProducto, LocalDate fechaDesde, LocalDate
 	fechaHasta, float porcentaje);
+	
+	void crearGestor();
 }

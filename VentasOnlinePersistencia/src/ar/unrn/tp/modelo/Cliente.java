@@ -18,7 +18,7 @@ public class Cliente {
 	private String nombre;
 	private String apellido;
 	private String email;
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<TarjetaDeCredito> tarjetas;
 
 	

@@ -2,11 +2,13 @@ package ar.unrn.tp.jpa.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import ar.unrn.tp.api.ProductoService;
@@ -124,8 +126,11 @@ public class ServicioProducto implements ProductoService{
 		boolean existe = false;
 		try {
 			tx.begin();
+	
+			String query = "SELECT p FROM Producto p WHERE p.codigo LIKE "+codigo;
+			System.out.println(query);
+			TypedQuery<Producto> q = em.createQuery(query, Producto.class);
 			
-			TypedQuery<Producto> q = em.createQuery("select p from Producto p where p.codigo="+ codigo, Producto.class);
 			productos = q.getResultList();
 			
 			if(!productos.isEmpty())
@@ -134,6 +139,7 @@ public class ServicioProducto implements ProductoService{
 			tx.commit();
 			} catch (Exception e) {
 				tx.rollback();
+				System.out.println(e.getMessage());
 				throw new RuntimeException(e);
 			} finally {
 				if (em != null && em.isOpen())

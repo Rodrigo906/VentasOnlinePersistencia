@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public abstract class Promocion {
@@ -16,6 +17,7 @@ public abstract class Promocion {
 	private Date diaDesde;
 	private Date diaHasta;
 	private float porcentajeDescuento;
+	@Transient
 	private ConversorDeFechas conversorFechas = new ConversorDeFechas();
 	
 	public Promocion(LocalDate diaDesde, LocalDate diaHasta, float porcentajeDescuento) 

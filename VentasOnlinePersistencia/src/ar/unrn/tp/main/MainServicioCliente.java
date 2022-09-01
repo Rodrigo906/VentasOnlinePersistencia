@@ -21,15 +21,13 @@ public class MainServicioCliente {
 		ClienteService sc = new ServicioCliente();
 		//sc.crearCliente("Rodrigo", "Calizaya", "41478211", "rodrigo111999@gmail.com");
 		
-		//sc.modificarCliente(1l, "Cristian", "41478211", "Garnica", "rodrigo111999@gmail.com");
-		//sc.modificarCliente(1l, "Rodrigo", "41478211", "Calizaya", "rodrigo111999@gmail.com");
+		//sc.modificarCliente(4l, "Cristian", "41478211", "Garnica", "rodrigo111999@gmail.com");
+		//sc.modificarCliente(4l, "Rodrigo", "41478211", "Calizaya", "rodrigo111999@gmail.com");
 		
 		//sc.agregarTarjeta(4l, "12345678", "Visa");
-		
-		//System.out.println(sc.listarTarjetas(1l).size());
 	
 		for (TarjetaDeCredito t: sc.listarTarjetas(4l)) {
-			System.out.println("algo"+ t.toString());
+			System.out.println("Tarjeta: "+ t.toString());
 		}
 		
 	}
