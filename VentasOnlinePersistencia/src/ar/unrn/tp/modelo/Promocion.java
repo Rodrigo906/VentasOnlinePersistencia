@@ -18,22 +18,25 @@ public abstract class Promocion {
 	private Date diaHasta;
 	private float porcentajeDescuento;
 	@Transient
-	private ConversorDeFechas conversorFechas = new ConversorDeFechas();
+	private ConversorDeFechas conversorFechas;
+	
+	public Promocion () {
+		
+	}
 	
 	public Promocion(LocalDate diaDesde, LocalDate diaHasta, float porcentajeDescuento) 
 	{
+		this.conversorFechas = new ConversorDeFechas();
 		this.diaDesde = this.conversorFechas.convertirADate(diaDesde);
 		this.diaHasta = this.conversorFechas.convertirADate(diaHasta);
 		this.porcentajeDescuento = porcentajeDescuento;
 	}
 	
-	public boolean promocionEstaVigente() 
-	{
+	public boolean promocionEstaVigente() {
 		Date fechaActual = new Date();
 		if (fechaActual.after(this.diaDesde) && fechaActual.before(this.diaHasta))
-		{
 			return true;
-		}
+
 		return false;
 	}
 

@@ -22,12 +22,10 @@ public class PromocionDeCompra extends Promocion{
 	}
 
 	@Override
-	public boolean tieneDescuento(String marcaTarjeta) 
-	{
-		if(this.marcaTarjeta == marcaTarjeta && super.promocionEstaVigente())
-		{
+	public boolean tieneDescuento(String marcaTarjeta) {
+		if(this.marcaTarjeta.equals(marcaTarjeta) && this.promocionEstaVigente())
 			return true;
-		}
+		
 		return false;
 	}
 	
@@ -44,22 +42,19 @@ public class PromocionDeCompra extends Promocion{
 		boolean seSuperponen = false;
 		
 		if(diaDesdeNueva.before(diaHastaExistente) && diaDesdeExistente.before(diaHastaNueva))
-		{
 			seSuperponen = true;
-		}
+	
 		if(diaDesdeNueva.compareTo(diaHastaExistente) == 0 || diaDesdeExistente.compareTo(diaHastaNueva) == 0)
-		{
 			seSuperponen = true;
-		}
+
 		return seSuperponen;
 	}
 	
 	public boolean esPromoSuperpuesta(Promocion promo) {
 		PromocionDeCompra pc = (PromocionDeCompra) promo;
 		if (pc.getMarca() == this.getMarca() && this.seSuperponen(promo))
-		{
 			return true;
-		}
+		
 		return false;
 	}
 

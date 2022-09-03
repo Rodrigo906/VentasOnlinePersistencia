@@ -35,13 +35,14 @@ public class ServicioVenta implements VentaService{
 			GestorPromociones gestor = q.getSingleResult();
 			Cliente cliente = em.getReference(Cliente.class, idCliente);
 			TarjetaDeCredito tarjeta =  em.getReference(TarjetaDeCredito.class, idTarjeta);
+			
 			if (!cliente.tieneEstaTarjeta(tarjeta))
 				throw new RuntimeException("La tarjeta no se encuetra asociada a su usuario");
 				
 			Carrito carrito = new Carrito(gestor, verificadorTarjeta, cliente);
 			
 			for(Map.Entry<Long, Integer> entry : productos.entrySet()) {
-				Producto p = em.getReference(Producto.class, entry.getKey());
+				Producto p = em.find(Producto.class, entry.getKey());
 				carrito.agregarProducto(new ProductoSeleccionado(p, entry.getValue()));	
 			}
 			Venta venta = carrito.realizarVenta(tarjeta);

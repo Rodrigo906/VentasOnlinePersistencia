@@ -103,7 +103,7 @@ public class ServicioCliente implements ClienteService{
 		try {
 			tx.begin();
 			
-			Cliente cliente = em.find(Cliente.class, idCliente);
+			Cliente cliente = em.getReference(Cliente.class, idCliente);
 			tarjetas = cliente.obtenerTarjetas();
 			
 			tx.commit();

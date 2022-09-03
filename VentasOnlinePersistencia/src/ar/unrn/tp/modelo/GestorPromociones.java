@@ -17,9 +17,9 @@ public class GestorPromociones {
 	@Id
 	@GeneratedValue
 	private long id;
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<Promocion> promocionesProducto;
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<Promocion> promocionesCompra;
 	
 	public GestorPromociones() {
@@ -67,8 +67,7 @@ public class GestorPromociones {
 			//Buscar si el producto tiene alguna promocion vigente
 			for (Promocion promo : this.promocionesProducto) {
 				if (promo.tieneDescuento(ps.getProducto().getMarca()))
-					precioProductos = promo.aplicarDescuento(precioProductos);
-				
+					precioProductos = promo.aplicarDescuento(precioProductos);	
 			}
 			montoTotal = montoTotal + precioProductos;
 		}

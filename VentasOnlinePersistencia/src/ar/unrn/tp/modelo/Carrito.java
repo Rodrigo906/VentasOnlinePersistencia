@@ -41,7 +41,6 @@ public class Carrito {
 				double montoTotal = this.gestorPromociones.calcularMontoTotal(marca, this.listaProductos);
 				venta = new Venta(fechaActual, this.cliente, this.getListadoProductos(), montoTotal);
 			}
-		//Agregar exepcion en caso de que las verificaciones sean incorrectas
 		return venta;
 	}
 	
