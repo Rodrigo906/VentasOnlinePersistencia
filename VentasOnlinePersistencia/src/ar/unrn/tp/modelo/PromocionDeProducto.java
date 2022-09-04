@@ -9,28 +9,24 @@ public class PromocionDeProducto extends Promocion{
 	
 	private String marcaProducto;
 	
-	public PromocionDeProducto(LocalDate diaDesde, LocalDate diaHasta, String marcaProducto, float porcentajeDescuento) 
-	{
+	public PromocionDeProducto(LocalDate diaDesde, LocalDate diaHasta, String marcaProducto, float porcentajeDescuento) {
 		super(diaDesde, diaHasta, porcentajeDescuento);
 		this.marcaProducto = marcaProducto;
 	}
 	
-	public float aplicarDescuento(float monto)
-	{
+	public float aplicarDescuento(float monto) {
 		return monto - monto * this.getPorcentajeDescuento();
 	}
 	
-	public boolean tieneDescuento(String marcaProducto)
-	{
+	public boolean tieneDescuento(String marcaProducto) {
 		boolean tieneDescuento = false;
-		if (this.marcaProducto == marcaProducto && super.promocionEstaVigente())
-		{
+		if (this.marcaProducto.equals(marcaProducto) && super.promocionEstaVigente())
 			tieneDescuento = true;
-		}
+		
 		return tieneDescuento;
 	}
 	
-	public String getMarca() {
+	private String getMarca() {
 		return this.marcaProducto;
 	}
 	
@@ -56,18 +52,9 @@ public class PromocionDeProducto extends Promocion{
 	public boolean esPromoSuperpuesta(Promocion promo) {
 		PromocionDeProducto pp = (PromocionDeProducto) promo;
 		if (pp.getMarca() == this.getMarca() && this.seSuperponen(promo))
-		{
 			return true;
-		}
+	
 		return false;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((marcaProducto == null) ? 0 : marcaProducto.hashCode());
-		return result;
 	}
 
 	@Override

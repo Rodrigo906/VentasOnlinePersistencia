@@ -43,7 +43,7 @@ public class Venta {
 		for (ProductoSeleccionado ps : productos)
 		{
 			prodComprados.add(new ProductoComprado(ps.getProducto().getCodigo(), ps.getProducto().getDescripcion(), 
-					ps.getProducto().getPrecio()));
+					ps.getProducto().getPrecio(), ps.getCantidad()));
 		}
 		return prodComprados;
 	}

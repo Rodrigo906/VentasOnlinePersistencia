@@ -21,6 +21,9 @@ public class Cliente {
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<TarjetaDeCredito> tarjetas;
 
+	protected Cliente() {
+		
+	}
 	
 	public Cliente(int dni, String nombre, String apellido, String email) 
 	{
@@ -74,7 +77,7 @@ public class Cliente {
 		this.setEmail(email);
 	}
 
-	public int getDni() {
+	private int getDni() {
 		return dni;
 	}
 
@@ -84,7 +87,7 @@ public class Cliente {
 		this.dni = dni;
 	}
 
-	public String getNombre() {
+	private String getNombre() {
 		return nombre;
 	}
 
@@ -94,7 +97,7 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	public String getApellido() {
+	private String getApellido() {
 		return apellido;
 	}
 
@@ -104,7 +107,7 @@ public class Cliente {
 		this.apellido = apellido;
 	}
 
-	public String getEmail() {
+	private String getEmail() {
 		return email;
 	}
 

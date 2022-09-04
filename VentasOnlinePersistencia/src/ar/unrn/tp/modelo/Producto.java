@@ -1,5 +1,6 @@
 package ar.unrn.tp.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ public class Producto {
 	@GeneratedValue
 
 	private long id;
+	@Column(unique=true)
 	private String codigo;
 	private String descripcion;
 	private String categoria;
@@ -82,6 +84,12 @@ public class Producto {
 		if (marca == null || marca.isEmpty())
 			throw new RuntimeException("Marca vacia");
 		this.marca = marca;
+	}
+
+	@Override
+	public String toString() {
+		return "Producto [codigo=" + codigo + ", descripcion=" + descripcion + ", categoria=" + categoria + ", precio="
+				+ precio + ", marca=" + marca + "]";
 	}	
 	
 }

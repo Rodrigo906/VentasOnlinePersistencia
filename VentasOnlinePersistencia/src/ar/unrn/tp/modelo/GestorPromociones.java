@@ -96,7 +96,20 @@ public class GestorPromociones {
 		return false;
 	}
 	
-	public List<Promocion> getPromociones (){
+	private List<Promocion> getPromocionesProducto() {
 		return this.promocionesProducto;
 	}
+	
+	private List<Promocion> getPromocionCompra() {
+		return this.promocionesCompra;
+	}
+	
+	private void setPromocionesProducto(List<Promocion> promociones) {
+		this.promocionesProducto = promociones;
+	}
+	
+	private void setPromocionesCompra(List<Promocion> promociones) {
+		this.promocionesCompra = promociones;
+	}
+	
 }

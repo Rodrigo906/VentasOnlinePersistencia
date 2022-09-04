@@ -2,17 +2,14 @@ package ar.unrn.tp.jpa.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import ar.unrn.tp.api.ProductoService;
-import ar.unrn.tp.modelo.Cliente;
 import ar.unrn.tp.modelo.Producto;
 
 public class ServicioProducto implements ProductoService{
@@ -25,14 +22,14 @@ public class ServicioProducto implements ProductoService{
 		try {
 			tx.begin();
 			
-			if(this.productoExiste(codigo))
-				throw new RuntimeException("El producto ya se encuentra registrado");	
-			
 			Producto p = new Producto(codigo, descripcion, categoria, marca, precio);
 			em.persist(p);
 			
 			tx.commit();
-			} catch (Exception e) {
+			}catch (PersistenceException e) {
+				throw new RuntimeException("El producto ya existe");
+			}
+			catch (Exception e) {
 				tx.rollback();
 				throw new RuntimeException(e);
 			} finally {
@@ -117,34 +114,5 @@ public class ServicioProducto implements ProductoService{
 			}
 		return existe;
 	}
-	
-	private boolean productoExiste(String codigo) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		List<Producto> productos = new ArrayList<Producto>();
-		boolean existe = false;
-		try {
-			tx.begin();
-	
-			String query = "SELECT p FROM Producto p WHERE p.codigo LIKE "+codigo;
-			System.out.println(query);
-			TypedQuery<Producto> q = em.createQuery(query, Producto.class);
-			
-			productos = q.getResultList();
-			
-			if(!productos.isEmpty())
-				existe = true;
-			
-			tx.commit();
-			} catch (Exception e) {
-				tx.rollback();
-				System.out.println(e.getMessage());
-				throw new RuntimeException(e);
-			} finally {
-				if (em != null && em.isOpen())
-				 em.close();
-			}
-		return existe;
-	}
+
 }

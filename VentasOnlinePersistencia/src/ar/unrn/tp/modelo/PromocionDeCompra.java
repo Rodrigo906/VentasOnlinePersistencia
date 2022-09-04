@@ -29,7 +29,7 @@ public class PromocionDeCompra extends Promocion{
 		return false;
 	}
 	
-	public String getMarca() {
+	private String getMarca() {
 		return this.marcaTarjeta;
 	}
 	

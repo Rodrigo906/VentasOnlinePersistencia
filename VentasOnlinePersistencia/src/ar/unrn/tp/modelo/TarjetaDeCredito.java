@@ -17,11 +17,11 @@ public class TarjetaDeCredito {
 		this.marca = marca;
 	}
 
-	public int getNumero() {
+	protected int getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	private void setNumero(int numero) {
 		this.numero = numero;
 	}
 
@@ -29,7 +29,7 @@ public class TarjetaDeCredito {
 		return marca;
 	}
 
-	public void setMarca(String marca) {
+	private void setMarca(String marca) {
 		this.marca = marca;
 	}
 

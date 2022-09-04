@@ -12,40 +12,50 @@ public class ProductoComprado {
 	private String codigo;
 	private String descripcion;
 	private float precio;
+	private int cantidad;
 	
-	public ProductoComprado(String codigo, String descripcion, float precio) 
+	public ProductoComprado(String codigo, String descripcion, float precio, int cantidad) 
 	{
 		this.codigo = codigo;
 		this.descripcion = descripcion;
 		this.precio = precio;
+		this.cantidad = cantidad;
 	}
 
-	public String getCodigo() {
+	private String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	private void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
-	public String getDescripcion() {
+	private String getDescripcion() {
 		return descripcion;
 	}
 
-	public void setDescripcion(String descripcion) {
+	private void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
-	public float getPrecio() {
+	private float getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(float precio) {
+	private void setPrecio(float precio) {
 		this.precio = precio;
+	}
+	
+	private void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+	
+	private int getCantidad() {
+		return this.cantidad;
 	}
 
 	@Override
 	public String toString() {
-		return "descripcion = " + descripcion +", "+ "codigo = " + codigo + ", " + "precio=" + precio + "\n";
+		return "descripcion = " + descripcion +", "+ "codigo = " + codigo + ", " + "precio=" + precio + ", "+ "cantidad= " + cantidad +"\n";
 	}
 }

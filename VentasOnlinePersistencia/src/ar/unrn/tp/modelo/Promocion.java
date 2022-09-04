@@ -40,19 +40,19 @@ public abstract class Promocion {
 		return false;
 	}
 
-	public Date getDiaDesde() {
+	protected Date getDiaDesde() {
 		return diaDesde;
 	}
 
-	public void setDiaDesde(Date diaDesde) {
+	private void setDiaDesde(Date diaDesde) {
 		this.diaDesde = diaDesde;
 	}
 
-	public Date getDiaHasta() {
+	protected Date getDiaHasta() {
 		return diaHasta;
 	}
 
-	public void setDiaHasta(Date diaHasta) {
+	private void setDiaHasta(Date diaHasta) {
 		this.diaHasta = diaHasta;
 	}
 	
@@ -62,11 +62,11 @@ public abstract class Promocion {
 
 	public abstract boolean esPromoSuperpuesta(Promocion promo);
 
-	public float getPorcentajeDescuento() {
+	protected float getPorcentajeDescuento() {
 		return porcentajeDescuento;
 	}
 
-	public void setPorcentajeDescuento(float porcentajeDescuento) {
+	private void setPorcentajeDescuento(float porcentajeDescuento) {
 		this.porcentajeDescuento = porcentajeDescuento;
 	}
 
