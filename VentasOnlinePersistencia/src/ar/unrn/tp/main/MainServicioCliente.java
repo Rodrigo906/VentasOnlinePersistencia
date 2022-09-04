@@ -18,16 +18,22 @@ public class MainServicioCliente {
 
 	public static void main(String[] args) {
 		
+		try {
+			
 		ClienteService sc = new ServicioCliente();
-		//sc.crearCliente("Rodrigo", "Calizaya", "41478211", "rodrigo111999@gmail.com");
+		//sc.crearCliente("Cristian", "Garnica", "42478211", "rodrigo111999@gmail.com");
 		
 		//sc.modificarCliente(4l, "Cristian", "41478211", "Garnica", "rodrigo111999@gmail.com");
-		//sc.modificarCliente(4l, "Rodrigo", "41478211", "Calizaya", "rodrigo111999@gmail.com");
+		//sc.modificarCliente(29l, "Rodrigo", "42478211", "Calizaya", "rodrigo111999@gmail.com");
 		
 		//sc.agregarTarjeta(4l, "12345678", "Visa");
 	
 		for (TarjetaDeCredito t: sc.listarTarjetas(4l)) {
 			System.out.println("Tarjeta: "+ t.toString());
+		}
+		
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		
 	}
