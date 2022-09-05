@@ -8,7 +8,7 @@ public class MainServicioProducto {
 	
 	public static void main(String[] args) {
 		
-		ProductoService ps = new ServicioProducto();
+		ProductoService ps = new ServicioProducto("$objectdb/db/p2.odb");
 		/*
 		try {
 			ps.crearProducto("2", "Pantalon", 2500, "Ropa deportiva", "Levis");
@@ -18,7 +18,7 @@ public class MainServicioProducto {
 		}
 		*/
 		
-		ps.modificarProducto(22L, "2", "Pantalon", 2500, "Ropa deportiva", "Levis");
+		//ps.modificarProducto(22L, "2", "Pantalon", 2500, "Ropa deportiva", "Levis");
 		
 		for (Producto p : ps.listarProductos()) {
 			System.out.println(p.toString());

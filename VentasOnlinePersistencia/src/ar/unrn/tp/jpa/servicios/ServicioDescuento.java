@@ -14,10 +14,15 @@ import ar.unrn.tp.modelo.PromocionDeProducto;
 
 public class ServicioDescuento implements DescuentoService{
 
+	private EntityManagerFactory emf;
+	
+	public ServicioDescuento(String emf) {
+		this.emf = Persistence.createEntityManagerFactory(emf);
+	}
+	
 	@Override
 	public void crearDescuentoSobreTotal(String marcaTarjeta, LocalDate fechaDesde, LocalDate fechaHasta,
 			float porcentaje) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -41,7 +46,6 @@ public class ServicioDescuento implements DescuentoService{
 
 	@Override
 	public void crearDescuento(String marcaProducto, LocalDate fechaDesde, LocalDate fechaHasta, float porcentaje) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -51,26 +55,6 @@ public class ServicioDescuento implements DescuentoService{
 			boolean seAgrego = gestor.agregarPromocionProducto(new PromocionDeProducto(fechaDesde, fechaHasta, marcaProducto, porcentaje));
 			if(!seAgrego)
 				throw new RuntimeException("No se pudo agregar la promocion");
-
-			tx.commit();
-			} catch (Exception e) {
-				tx.rollback();
-				throw new RuntimeException(e);
-			} finally {
-				if (em != null && em.isOpen())
-				 em.close();
-			}
-	}
-	
-	public void crearGestor() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		try {
-			tx.begin();
-			
-			GestorPromociones gestor = new GestorPromociones();
-			em.persist(gestor);
 
 			tx.commit();
 			} catch (Exception e) {

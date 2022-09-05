@@ -11,14 +11,18 @@ import javax.persistence.TypedQuery;
 
 import ar.unrn.tp.api.ClienteService;
 import ar.unrn.tp.modelo.Cliente;
-import ar.unrn.tp.modelo.Producto;
 import ar.unrn.tp.modelo.TarjetaDeCredito;
 
 public class ServicioCliente implements ClienteService{
 	
+	private EntityManagerFactory emf;
+	
+	public ServicioCliente(String emf) {
+		this.emf = Persistence.createEntityManagerFactory(emf);
+	}
+	
 	@Override
 	public void crearCliente(String nombre, String apellido, String dni, String email) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		List<Cliente> clientes = new ArrayList<Cliente>();
@@ -45,7 +49,6 @@ public class ServicioCliente implements ClienteService{
 
 	@Override
 	public void modificarCliente(Long idCliente, String nombre, String dni, String apellido, String email) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -72,7 +75,6 @@ public class ServicioCliente implements ClienteService{
 
 	@Override
 	public void agregarTarjeta(Long idCliente, String nro, String marca) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -96,7 +98,6 @@ public class ServicioCliente implements ClienteService{
 
 	@Override
 	public List<TarjetaDeCredito> listarTarjetas(Long idCliente) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		List<TarjetaDeCredito> tarjetas = new ArrayList<TarjetaDeCredito>();
@@ -118,7 +119,6 @@ public class ServicioCliente implements ClienteService{
 	}
 	
 	private boolean clienteExiste(long idCliente) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		List<Cliente> clientes = new ArrayList<Cliente>();

@@ -14,9 +14,14 @@ import ar.unrn.tp.modelo.Producto;
 
 public class ServicioProducto implements ProductoService{
 
+	private EntityManagerFactory emf;
+	
+	public ServicioProducto(String emf) {
+		this.emf = Persistence.createEntityManagerFactory(emf);
+	}
+	
 	@Override
 	public void crearProducto(String codigo, String descripcion, float precio, String categoria, String marca) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -40,7 +45,6 @@ public class ServicioProducto implements ProductoService{
 
 	@Override
 	public void modificarProducto(Long idProducto, String codigo, String descripcion, float precio, String categoria, String marca) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -68,7 +72,6 @@ public class ServicioProducto implements ProductoService{
 
 	@Override
 	public List<Producto> listarProductos() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		List<Producto> productos  = new ArrayList<Producto>();
@@ -90,7 +93,6 @@ public class ServicioProducto implements ProductoService{
 	}
 
 	private boolean productoExiste(long idProducto) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		List<Producto> productos = new ArrayList<Producto>();

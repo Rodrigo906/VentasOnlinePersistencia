@@ -22,9 +22,14 @@ import ar.unrn.tp.servicio_tarjeta.VerificacionDeTarjetaWeb;
 
 public class ServicioVenta implements VentaService{
 
+	private EntityManagerFactory emf;
+
+	public ServicioVenta(String emf) {
+		this.emf = Persistence.createEntityManagerFactory(emf);
+	}
+	
 	@Override
 	public void realizarVenta(Long idCliente, Map<Long, Integer> productos, Long idTarjeta) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		VerificarTarjeta verificadorTarjeta = new VerificacionDeTarjetaWeb();
@@ -62,7 +67,6 @@ public class ServicioVenta implements VentaService{
 
 	@Override
 	public float calcularMonto(Map<Long, Integer> productos, Long idTarjeta) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		List<ProductoSeleccionado> productosSeleccionados = new ArrayList<>();
@@ -94,7 +98,6 @@ public class ServicioVenta implements VentaService{
 
 	@Override
 	public List<Venta> ventas() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/p2.odb");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		List<Venta> ventas  = new ArrayList<Venta>();

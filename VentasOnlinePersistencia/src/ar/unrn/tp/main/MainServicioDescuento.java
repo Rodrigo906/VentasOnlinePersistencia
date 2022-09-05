@@ -9,7 +9,7 @@ public class MainServicioDescuento {
 
 	public static void main(String[] args) {
 		
-		DescuentoService sd = new ServicioDescuento();
+		DescuentoService sd = new ServicioDescuento("$objectdb/db/p2.odb");
 		LocalDate fechaDesde;
 		LocalDate fechaHasta;
 		//sd.crearGestor();

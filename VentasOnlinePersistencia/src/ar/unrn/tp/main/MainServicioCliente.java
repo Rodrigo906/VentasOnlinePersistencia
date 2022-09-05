@@ -20,7 +20,7 @@ public class MainServicioCliente {
 		
 		try {
 			
-		ClienteService sc = new ServicioCliente();
+		ClienteService sc = new ServicioCliente("$objectdb/db/p2.odb");
 		//sc.crearCliente("Cristian", "Garnica", "42478211", "rodrigo111999@gmail.com");
 		
 		//sc.modificarCliente(4l, "Cristian", "41478211", "Garnica", "rodrigo111999@gmail.com");

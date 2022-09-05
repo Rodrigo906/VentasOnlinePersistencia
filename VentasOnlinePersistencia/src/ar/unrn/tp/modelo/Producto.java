@@ -90,6 +90,9 @@ public class Producto {
 	public String toString() {
 		return "Producto [codigo=" + codigo + ", descripcion=" + descripcion + ", categoria=" + categoria + ", precio="
 				+ precio + ", marca=" + marca + "]";
-	}	
+	}
+	public long getId() {
+		return this.id;
+	}
 	
 }
