@@ -1,14 +1,19 @@
 package ar.unrn.tp.jpa.servicios;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import ar.unrn.tp.api.DescuentoService;
 import ar.unrn.tp.modelo.GestorPromociones;
+import ar.unrn.tp.modelo.Producto;
+import ar.unrn.tp.modelo.Promocion;
 import ar.unrn.tp.modelo.PromocionDeCompra;
 import ar.unrn.tp.modelo.PromocionDeProducto;
 
@@ -64,6 +69,27 @@ public class ServicioDescuento implements DescuentoService{
 				if (em != null && em.isOpen())
 				 em.close();
 			}
+	}
+	
+	public List<Promocion> listarDescuentos() {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		List<Promocion> promociones = new ArrayList<Promocion>();
+		try {
+			tx.begin();
+			
+			TypedQuery<Promocion> q = em.createQuery("select p from Promocion p", Promocion.class);
+			promociones = q.getResultList();
+
+			tx.commit();
+			} catch (Exception e) {
+				tx.rollback();
+				throw new RuntimeException(e);
+			} finally {
+				if (em != null && em.isOpen())
+				 em.close();
+			}
+		return promociones;
 	}
 
 }

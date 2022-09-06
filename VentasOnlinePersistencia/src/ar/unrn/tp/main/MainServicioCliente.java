@@ -26,7 +26,7 @@ public class MainServicioCliente {
 		//sc.modificarCliente(4l, "Cristian", "41478211", "Garnica", "rodrigo111999@gmail.com");
 		//sc.modificarCliente(29l, "Rodrigo", "42478211", "Calizaya", "rodrigo111999@gmail.com");
 		
-		//sc.agregarTarjeta(4l, "12345678", "Visa");
+		//sc.agregarTarjeta(4l, "5642537", "Matercard");
 	
 		for (TarjetaDeCredito t: sc.listarTarjetas(4l)) {
 			System.out.println("Tarjeta: "+ t.toString());

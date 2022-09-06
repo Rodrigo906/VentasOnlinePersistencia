@@ -26,7 +26,7 @@ public class PromocionDeProducto extends Promocion{
 		return tieneDescuento;
 	}
 	
-	private String getMarca() {
+	public String getMarca() {
 		return this.marcaProducto;
 	}
 	

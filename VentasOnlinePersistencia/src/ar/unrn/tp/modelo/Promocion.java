@@ -40,7 +40,7 @@ public abstract class Promocion {
 		return false;
 	}
 
-	protected Date getDiaDesde() {
+	public Date getDiaDesde() {
 		return diaDesde;
 	}
 
@@ -48,7 +48,9 @@ public abstract class Promocion {
 		this.diaDesde = diaDesde;
 	}
 
-	protected Date getDiaHasta() {
+	public abstract String getMarca();
+	
+	public Date getDiaHasta() {
 		return diaHasta;
 	}
 
@@ -62,7 +64,7 @@ public abstract class Promocion {
 
 	public abstract boolean esPromoSuperpuesta(Promocion promo);
 
-	protected float getPorcentajeDescuento() {
+	public float getPorcentajeDescuento() {
 		return porcentajeDescuento;
 	}
 

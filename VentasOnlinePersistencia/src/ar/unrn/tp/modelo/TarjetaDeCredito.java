@@ -38,6 +38,10 @@ public class TarjetaDeCredito {
 		return "TarjetaDeCredito [numero=" + numero + ", marca=" + marca + "]";
 	}
 	
+	public long getId() {
+		return this.id;
+	}
+	
 	
 	
 
