@@ -9,14 +9,9 @@ public class MainServicioProducto {
 	public static void main(String[] args) {
 		
 		ProductoService ps = new ServicioProducto("$objectdb/db/p2.odb");
-		/*
-		try {
-			ps.crearProducto("2", "Pantalon", 2500, "Ropa deportiva", "Levis");
+		
+		ps.crearProducto("3", "Remera", 1500, "Ropa deportiva", "Levis");
 			
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		*/
 		
 		//ps.modificarProducto(22L, "2", "Pantalon", 2500, "Ropa deportiva", "Levis");
 		

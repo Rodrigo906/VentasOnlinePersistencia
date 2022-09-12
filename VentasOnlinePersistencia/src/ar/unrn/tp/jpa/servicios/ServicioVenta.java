@@ -44,7 +44,7 @@ public class ServicioVenta implements VentaService{
 			if (!cliente.tieneEstaTarjeta(tarjeta))
 				throw new RuntimeException("La tarjeta no se encuetra asociada a su usuario");
 			if (productos.isEmpty())
-				throw new RuntimeException("No a ingresado ningun producto");
+				throw new RuntimeException("No a ingresado productos");
 				
 			Carrito carrito = new Carrito(gestor, verificadorTarjeta, cliente);
 			

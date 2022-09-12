@@ -10,17 +10,13 @@ public class MainServicioDescuento {
 	public static void main(String[] args) {
 		
 		DescuentoService sd = new ServicioDescuento("$objectdb/db/p2.odb");
-		LocalDate fechaDesde;
-		LocalDate fechaHasta;
-		//sd.crearGestor();
-		/*
-		fechaDesde = LocalDate.of(2022, 8, 31);
-		fechaHasta = LocalDate.of(2022, 9, 15);
-		sd.crearDescuentoSobreTotal("Visa", fechaDesde, fechaHasta, 0.08f);
-		*/
 		
-		fechaDesde = LocalDate.of(2022, 8, 1);
-		fechaHasta = LocalDate.of(2022, 9, 13);
-		sd.crearDescuento("Matarazzo", fechaDesde, fechaHasta, 0.05f);
+		LocalDate fechaDesde = LocalDate.of(2022, 9, 11);
+		LocalDate fechaHasta = LocalDate.of(2022, 9, 16);
+		//sd.crearDescuentoSobreTotal("Macro", fechaDesde, fechaHasta, 0.08f);
+		
+		//sd.crearDescuento("Levis", fechaDesde, fechaHasta, 0.05f);
+		
 	}
+	
 }
