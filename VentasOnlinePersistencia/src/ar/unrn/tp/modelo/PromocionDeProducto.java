@@ -2,12 +2,19 @@ package ar.unrn.tp.modelo;
 
 import java.time.LocalDate;
 import java.util.Date;
+
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("PP")
 public class PromocionDeProducto extends Promocion{
 	
 	private String marcaProducto;
+	
+	protected PromocionDeProducto() {
+		
+	}
 	
 	public PromocionDeProducto(LocalDate diaDesde, LocalDate diaHasta, String marcaProducto, float porcentajeDescuento) {
 		super(diaDesde, diaHasta, porcentajeDescuento);
@@ -20,7 +27,7 @@ public class PromocionDeProducto extends Promocion{
 	
 	public boolean tieneDescuento(String marcaProducto) {
 		boolean tieneDescuento = false;
-		if (this.marcaProducto.equals(marcaProducto) && super.promocionEstaVigente())
+		if (this.marcaProducto.equals(marcaProducto) && this.promocionEstaVigente())
 			tieneDescuento = true;
 		
 		return tieneDescuento;

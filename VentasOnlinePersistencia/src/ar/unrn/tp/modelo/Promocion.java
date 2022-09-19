@@ -3,12 +3,16 @@ package ar.unrn.tp.modelo;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.Transient;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "tipo_promocion")
 public abstract class Promocion {
 	
 	@Id

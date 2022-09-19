@@ -12,6 +12,10 @@ public class TarjetaDeCredito {
 	private int numero;
 	private String marca;
 	
+	protected TarjetaDeCredito() {
+		
+	}
+	
 	public TarjetaDeCredito(int numero, String marca) {
 		this.numero = numero;
 		this.marca = marca;

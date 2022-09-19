@@ -18,23 +18,26 @@ public class MainServicioCliente {
 
 	public static void main(String[] args) {
 		
-		try {
+		//try {
 			
+		//ClienteService sc = new ServicioCliente("ORM");
 		ClienteService sc = new ServicioCliente("$objectdb/db/p2.odb");
-		//sc.crearCliente("Cristian", "Garnica", "42478211", "rodrigo111999@gmail.com");
+		sc.crearCliente("Cristian", "Garnica", "42478211", "rodrigo111999@gmail.com");
 		
 		//sc.modificarCliente(4l, "Cristian", "41478211", "Garnica", "rodrigo111999@gmail.com");
 		//sc.modificarCliente(29l, "Rodrigo", "42478211", "Calizaya", "rodrigo111999@gmail.com");
 		
-		//sc.agregarTarjeta(4l, "5642537", "Matercard");
+		sc.agregarTarjeta(1l, "5642537", "Matercard");
+		sc.agregarTarjeta(1l, "1234567", "Visa");
 	
-		for (TarjetaDeCredito t: sc.listarTarjetas(4l)) {
+		
+		for (TarjetaDeCredito t: sc.listarTarjetas(1l)) {
 			System.out.println("Tarjeta: "+ t.toString());
 		}
-		
+		/*
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
-		}
+		}*/
 		
 	}
 }

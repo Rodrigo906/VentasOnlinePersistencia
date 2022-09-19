@@ -33,7 +33,8 @@ public class ServicioDescuento implements DescuentoService{
 		try {
 			tx.begin();
 			
-			GestorPromociones gestor = em.getReference(GestorPromociones.class, 8l);
+			TypedQuery<GestorPromociones> q = em.createQuery("select g from GestorPromociones g", GestorPromociones.class);
+			GestorPromociones gestor = q.getSingleResult();
 			
 			boolean seAgrego = gestor.agregarPromocionCompra(new PromocionDeCompra(fechaDesde, fechaHasta, marcaTarjeta, porcentaje));
 			if(!seAgrego)
@@ -56,7 +57,9 @@ public class ServicioDescuento implements DescuentoService{
 		try {
 			tx.begin();
 			
-			GestorPromociones gestor = em.find(GestorPromociones.class, 8l);
+			TypedQuery<GestorPromociones> q = em.createQuery("select g from GestorPromociones g", GestorPromociones.class);
+			GestorPromociones gestor = q.getSingleResult();
+			
 			boolean seAgrego = gestor.agregarPromocionProducto(new PromocionDeProducto(fechaDesde, fechaHasta, marcaProducto, porcentaje));
 			if(!seAgrego)
 				throw new RuntimeException("No se pudo agregar la promocion");

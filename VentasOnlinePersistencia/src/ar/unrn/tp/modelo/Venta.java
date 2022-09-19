@@ -11,8 +11,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class Venta {
@@ -21,17 +26,21 @@ public class Venta {
 	@GeneratedValue
 	private long id;
 	private Date fecha;
-	@Embedded
+	@ManyToOne   
 	private Cliente cliente;
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinColumn(name = "id_venta")
 	private List<ProductoComprado> productos;
 	private double montoTotal;
 	@Transient
 	private ConversorDeFechas conversorFechas;
 	
+	protected Venta() {}
+	
 	public Venta(LocalDateTime fecha, Cliente cliente, ArrayList<ProductoSeleccionado> productos, double montoTotal) {
 		this.conversorFechas = new ConversorDeFechas();
-		this.productos = new ArrayList<>();
+		this.productos = new ArrayList<ProductoComprado>();
 		this.fecha = this.conversorFechas.convertirADate(fecha);
 		this.cliente = cliente;
 		this.productos = this.cargarProductos(productos);

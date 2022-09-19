@@ -7,18 +7,23 @@ import java.util.regex.Pattern;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 public class Cliente {
 	
 	@Id
 	@GeneratedValue
-	
 	private long id;
 	private int dni;
 	private String nombre;
 	private String apellido;
 	private String email;
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "id_cliente")
 	private List<TarjetaDeCredito> tarjetas;
 
 	protected Cliente() {

@@ -34,7 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextArea;
 import java.awt.Font;
 
 public class VentanaPrincipal extends JFrame {
@@ -53,15 +52,14 @@ public class VentanaPrincipal extends JFrame {
 	private JScrollPane panel_tablaDescuento;
 	private JTextField textFieldTotal;
 	
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					String emf = "$objectdb/db/p2.odb";
-					long idCliente = 4l;
+					//String emf = "$objectdb/db/p2.odb";
+					String emf = "ORM";
+					
+					long idCliente = 1l;
 					VentanaPrincipal frame = new VentanaPrincipal(new ServicioProducto(emf), new ServicioDescuento(emf), 
 							new ServicioCliente(emf), new ServicioVenta(emf), idCliente);
 					frame.setVisible(true);

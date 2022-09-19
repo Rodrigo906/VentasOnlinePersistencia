@@ -105,8 +105,8 @@ public class ServicioCliente implements ClienteService{
 			tx.begin();
 			
 			Cliente cliente = em.getReference(Cliente.class, idCliente);
+			cliente.obtenerTarjetas().size();
 			tarjetas = cliente.obtenerTarjetas();
-			
 			tx.commit();
 			} catch (Exception e) {
 				tx.rollback();

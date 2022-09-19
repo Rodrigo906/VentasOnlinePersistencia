@@ -3,12 +3,18 @@ package ar.unrn.tp.modelo;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("PC")
 public class PromocionDeCompra extends Promocion{
 
 	private String marcaTarjeta;
+	
+	protected PromocionDeCompra() {
+		
+	}
 	
 	public PromocionDeCompra(LocalDate diaDesde, LocalDate diaHasta, String marcaTarjeta, float porcentajeDescuento)
 	{

@@ -9,7 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class GestorPromociones {
@@ -17,10 +23,15 @@ public class GestorPromociones {
 	@Id
 	@GeneratedValue
 	private long id;
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	
+	@OneToMany(cascade = CascadeType.PERSIST) //targetEntity = PromocionDeProducto.class)
+	@JoinColumn(name = "id_gestorPP")
 	private List<Promocion> promocionesProducto;
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+
+	@OneToMany(cascade = CascadeType.PERSIST, targetEntity = PromocionDeCompra.class)
+	@JoinColumn(name = "id_gestorPC")
 	private List<Promocion> promocionesCompra;
+	
 	
 	public GestorPromociones() {
 		this.promocionesProducto = new ArrayList<Promocion>();
@@ -96,11 +107,11 @@ public class GestorPromociones {
 		return false;
 	}
 	
-	private List<Promocion> getPromocionesProducto() {
+	public List<Promocion> getPromocionesProducto() {
 		return this.promocionesProducto;
 	}
 	
-	private List<Promocion> getPromocionCompra() {
+	public List<Promocion> getPromocionCompra() {
 		return this.promocionesCompra;
 	}
 	

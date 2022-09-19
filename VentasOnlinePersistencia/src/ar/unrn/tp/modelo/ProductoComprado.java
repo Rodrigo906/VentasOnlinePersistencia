@@ -14,6 +14,10 @@ public class ProductoComprado {
 	private float precio;
 	private int cantidad;
 	
+	protected ProductoComprado() {
+		
+	}
+	
 	public ProductoComprado(String codigo, String descripcion, float precio, int cantidad) 
 	{
 		this.codigo = codigo;

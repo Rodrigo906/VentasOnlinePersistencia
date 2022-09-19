@@ -19,6 +19,8 @@ public class Producto {
 	private float precio;
 	private String marca;
 	
+	protected Producto() {}
+	
 	public Producto(String codigo, String descripcion, String categoria, String marca, float precio) {
 		if (codigo == null)
 			throw new RuntimeException("Codigo vacio");
