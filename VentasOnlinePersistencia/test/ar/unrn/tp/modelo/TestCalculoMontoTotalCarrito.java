@@ -137,7 +137,7 @@ public class TestCalculoMontoTotalCarrito {
 		carrito.agregarProducto(ps1);
 		carrito.agregarProducto(ps2);
 		
-		Assert.assertNotNull(carrito.realizarVenta(tarjeta));
+		Assert.assertNotNull(carrito.realizarVenta(tarjeta, "1-2022"));
 	}
 	
 	

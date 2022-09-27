@@ -4,13 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 @Entity
 public class Producto {
 	
 	@Id
 	@GeneratedValue
-
 	private long id;
 	@Column(unique=true)
 	private String codigo;
@@ -18,6 +18,8 @@ public class Producto {
 	private String categoria;
 	private float precio;
 	private String marca;
+	@Version
+	private long version;
 	
 	protected Producto() {}
 	
@@ -88,13 +90,26 @@ public class Producto {
 		this.marca = marca;
 	}
 
-	@Override
-	public String toString() {
-		return "Producto [codigo=" + codigo + ", descripcion=" + descripcion + ", categoria=" + categoria + ", precio="
-				+ precio + ", marca=" + marca + "]";
-	}
 	public long getId() {
 		return this.id;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	public long getVersion() {
+		return this.version;
+	}
+	
+	public void setVersion(long version) {
+		this.version = version;
+	}
+
+	@Override
+	public String toString() {
+		return "Producto [id=" + id + ", codigo=" + codigo + ", descripcion=" + descripcion + ", categoria=" + categoria
+				+ ", precio=" + precio + ", marca=" + marca + ", version=" + version + "]";
 	}
 	
 }

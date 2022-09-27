@@ -5,8 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import ar.unrn.tp.api.ProductoService;
@@ -44,33 +46,6 @@ public class ServicioProducto implements ProductoService{
 	}
 
 	@Override
-	public void modificarProducto(Long idProducto, String codigo, String descripcion, float precio, String categoria, String marca) {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		try {
-			tx.begin();
-			
-			if(!this.productoExiste(idProducto))
-				throw new RuntimeException("El producto no se encuentra registrado");
-	
-			Producto p = em.getReference(Producto.class, idProducto);
-			p.setCodigo(codigo);
-			p.setDescripcion(descripcion);
-			p.setPrecio(precio);
-			p.setCategoria(categoria);
-			p.setMarca(marca);
-			
-			tx.commit();
-			} catch (Exception e) {
-				tx.rollback();
-				throw new RuntimeException(e);
-			} finally {
-				if (em != null && em.isOpen())
-				 em.close();
-			}
-	}
-
-	@Override
 	public List<Producto> listarProductos() {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -90,6 +65,33 @@ public class ServicioProducto implements ProductoService{
 				 em.close();
 			}
 		return productos;
+	}
+	
+	@Override
+	public void modificarProducto(Long idProducto, String codigo, String descripcion, float precio, String categoria, String marca, long version) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			
+			if(!this.productoExiste(idProducto))
+				throw new RuntimeException("El producto no se encuentra registrado");
+			
+			Producto p = new Producto(codigo, descripcion, categoria, marca, precio);
+			p.setVersion(version);
+			p.setId(idProducto);
+			em.merge(p);
+			  
+			tx.commit();
+			} catch (OptimisticLockException e1) {
+				throw new RuntimeException("El producto fue modificado por otro usuario");
+			} catch (Exception e2) {
+				tx.rollback();
+				throw new RuntimeException(e2);
+			} finally {
+				if (em != null && em.isOpen())
+				 em.close();
+			}
 	}
 
 	private boolean productoExiste(long idProducto) {

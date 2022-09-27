@@ -28,7 +28,7 @@ public class GestorPromociones {
 	@JoinColumn(name = "id_gestorPP")
 	private List<Promocion> promocionesProducto;
 
-	@OneToMany(cascade = CascadeType.PERSIST, targetEntity = PromocionDeCompra.class)
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_gestorPC")
 	private List<Promocion> promocionesCompra;
 	

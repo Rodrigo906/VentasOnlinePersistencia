@@ -7,12 +7,14 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.LockModeType;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import ar.unrn.tp.api.VentaService;
 import ar.unrn.tp.modelo.Carrito;
 import ar.unrn.tp.modelo.Cliente;
 import ar.unrn.tp.modelo.GestorPromociones;
+import ar.unrn.tp.modelo.NextNumber;
 import ar.unrn.tp.modelo.Producto;
 import ar.unrn.tp.modelo.ProductoSeleccionado;
 import ar.unrn.tp.modelo.TarjetaDeCredito;
@@ -52,7 +54,12 @@ public class ServicioVenta implements VentaService{
 				Producto p = em.find(Producto.class, entry.getKey());
 				carrito.agregarProducto(new ProductoSeleccionado(p, entry.getValue()));	
 			}
-			Venta venta = carrito.realizarVenta(tarjeta);
+			
+			TypedQuery<NextNumber> qNumber = em.createQuery("select n from NextNumber n", NextNumber.class);
+			qNumber.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+			NextNumber n = qNumber.getSingleResult();
+			
+			Venta venta = carrito.realizarVenta(tarjeta, n.recuperarSiguiente());
 			em.persist(venta);
 			
 			tx.commit();

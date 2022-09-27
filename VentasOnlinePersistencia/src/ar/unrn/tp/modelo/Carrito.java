@@ -29,7 +29,7 @@ public class Carrito {
 		return this.listaProductos;
 	}
 	
-	public Venta realizarVenta(TarjetaDeCredito tarjeta) {
+	public Venta realizarVenta(TarjetaDeCredito tarjeta, String codigo) {
 		Venta venta = null;
 		int numeroTarjeta = tarjeta.getNumero();
 		String marca = tarjeta.getMarca();
@@ -39,7 +39,7 @@ public class Carrito {
 			{
 				LocalDateTime fechaActual = LocalDateTime.now();
 				double montoTotal = this.gestorPromociones.calcularMontoTotal(marca, this.listaProductos);
-				venta = new Venta(fechaActual, this.cliente, this.getListadoProductos(), montoTotal);
+				venta = new Venta(fechaActual, this.cliente, this.getListadoProductos(), montoTotal, codigo);
 			}
 		return venta;
 	}

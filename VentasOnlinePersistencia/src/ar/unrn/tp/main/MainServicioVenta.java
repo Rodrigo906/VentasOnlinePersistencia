@@ -10,7 +10,7 @@ import ar.unrn.tp.api.ProductoService;
 import ar.unrn.tp.api.VentaService;
 import ar.unrn.tp.jpa.servicios.ServicioCliente;
 import ar.unrn.tp.jpa.servicios.ServicioDescuento;
-import ar.unrn.tp.jpa.servicios.ServicioGestorPromociones;
+import ar.unrn.tp.jpa.servicios.MyService;
 import ar.unrn.tp.jpa.servicios.ServicioProducto;
 import ar.unrn.tp.jpa.servicios.ServicioVenta;
 import ar.unrn.tp.modelo.Venta;
@@ -31,25 +31,17 @@ public class MainServicioVenta {
 		ProductoService ps = new ServicioProducto("ORM");
 		ps.crearProducto("1", "Remera", 1500, "Ropa deportiva", "Levis");
 		ps.crearProducto("2", "Pantalon", 2000, "Ropa de vestir", "Brand");
-		*/
-		ClienteService sc = new ServicioCliente("ORM");
-		//sc.crearCliente("Cristian", "Garnica", "42478211", "rodrigo111999@gmail.com");
-		//sc.agregarTarjeta(6l, "5642537", "Matercard");
 		
-		//VentaService vs = new ServicioVenta("$objectdb/db/p2.odb");
+		ClienteService sc = new ServicioCliente("ORM");
+		sc.crearCliente("Cristian", "Garnica", "42478211", "rodrigo111999@gmail.com");
+		sc.agregarTarjeta(6l, "5642537", "Matercard");
+		
+		VentaService vs = new ServicioVenta("$objectdb/db/p2.odb");
 		VentaService vs = new ServicioVenta("ORM");
 		
-		Map<Long, Integer> productos = new HashMap<Long, Integer>();
-		productos.put(4L, 1);
-		productos.put(5L, 2);
-		
-		/*productos.put(11L, 1);
-		productos.put(22L, 2);*/
-		
 		//System.out.println(vs.calcularMonto(productos, 5L));
-		System.out.println(vs.calcularMonto(productos, 7L));
+		//System.out.println(vs.calcularMonto(productos, 7L));
 		
-		vs.realizarVenta(6L, productos, 7L);
 		try {
 		for (Venta v : vs.ventas()) {
 			System.out.println("---------------------------------------------------------");
@@ -57,8 +49,19 @@ public class MainServicioVenta {
 		}
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
-		}
+		}*/
 		
+		
+		
+		//PRUEBA DE CONCURRENCIA
+		VentaService vs = new ServicioVenta("ORM");
+		
+		Map<Long, Integer> productos = new HashMap<Long, Integer>();
+		productos.put(7L, 1);
+		productos.put(8L, 2);
+		
+		vs.realizarVenta(1L, productos, 2L);
+	
 	}
 
 }
