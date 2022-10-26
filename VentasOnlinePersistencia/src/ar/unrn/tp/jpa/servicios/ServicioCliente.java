@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 import ar.unrn.tp.api.ClienteService;
 import ar.unrn.tp.modelo.Cliente;
 import ar.unrn.tp.modelo.TarjetaDeCredito;
+import ar.unrn.tp.modelo.Venta;
 
 public class ServicioCliente implements ClienteService{
 	
@@ -141,6 +142,28 @@ public class ServicioCliente implements ClienteService{
 				 em.close();
 			}
 		return existe;
+	}
+	
+	@Override
+	public List<Cliente> obtenerClientes(){
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		try {
+			tx.begin();
+			
+			TypedQuery<Cliente> q = em.createQuery("select c from Cliente c", Cliente.class);
+			clientes = q.getResultList();
+			
+			tx.commit();
+			} catch (Exception e) {
+				tx.rollback();
+				throw new RuntimeException(e);
+			} finally {
+				if (em != null && em.isOpen())
+				 em.close();
+			}
+		return clientes;
 	}
 
 }

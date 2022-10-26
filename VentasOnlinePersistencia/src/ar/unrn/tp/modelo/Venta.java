@@ -19,20 +19,27 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 public class Venta {
 
 	@Id
 	@GeneratedValue
+	@Expose
 	private long id;
+	@Expose
 	private Date fecha;
+	@Expose
 	private String codigo;
-	@ManyToOne   
+	@ManyToOne
 	private Cliente cliente;
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "id_venta")
+	@Expose
 	private List<ProductoComprado> productos;
+	@Expose
 	private double montoTotal;
 	@Transient
 	private ConversorDeFechas conversorFechas;
@@ -62,12 +69,11 @@ public class Venta {
 	@Override
 	public String toString() {
 		return "Venta: \n [Fecha = " + fecha
-				+ "\n" + cliente.toString() 
-				+ "\n Productos =" + "\n" + productos.toString() 
+				+ "\n Productos = " + "\n" + productos.toString() 
 				+ "\n MontoTotal = " + montoTotal+"]";
 	}
 
-	private Date getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
@@ -75,7 +81,7 @@ public class Venta {
 		this.fecha = fecha;
 	}
 
-	private String getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
@@ -99,7 +105,7 @@ public class Venta {
 		this.productos = productos;
 	}
 
-	private double getMontoTotal() {
+	public double getMontoTotal() {
 		return montoTotal;
 	}
 

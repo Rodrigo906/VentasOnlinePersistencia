@@ -3,15 +3,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 public class ProductoComprado {
 
 	@Id
 	@GeneratedValue
+	@Expose
 	private long id;
+	@Expose
 	private String codigo;
+	@Expose
 	private String descripcion;
+	@Expose
 	private float precio;
+	@Expose
 	private int cantidad;
 	
 	protected ProductoComprado() {

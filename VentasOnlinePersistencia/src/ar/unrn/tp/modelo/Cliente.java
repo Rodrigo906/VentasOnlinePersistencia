@@ -5,21 +5,30 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import com.google.gson.annotations.Expose;
+
 
 @Entity
 public class Cliente {
 	
 	@Id
 	@GeneratedValue
+	@Expose
 	private long id;
+	@Expose
 	private int dni;
+	@Expose
 	private String nombre;
+	@Expose
 	private String apellido;
+	@Expose
 	private String email;
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
@@ -52,11 +61,6 @@ public class Cliente {
 		Pattern pattern = Pattern.compile("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$");
 		Matcher matcher = pattern.matcher(email);
 		return matcher.matches();
-	}
-
-	@Override
-	public String toString() {
-		return "Cliente [nombre=" + nombre + ", apellido=" + apellido + "]";
 	}
 	
 	public void agregarTarjeta (TarjetaDeCredito tarjeta) {
@@ -92,7 +96,7 @@ public class Cliente {
 		this.dni = dni;
 	}
 
-	private String getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
@@ -120,5 +124,15 @@ public class Cliente {
 		if (!emailEsValido(email) || email.isEmpty())
 			throw new RuntimeException("Email incorrecto");
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "id=" + id + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", email="
+				+ email;
+	}
+	
+	public long getId() {
+		return this.id;
 	}
 }

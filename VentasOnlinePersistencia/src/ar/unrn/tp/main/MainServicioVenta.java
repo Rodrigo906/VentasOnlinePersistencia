@@ -10,6 +10,7 @@ import ar.unrn.tp.api.ProductoService;
 import ar.unrn.tp.api.VentaService;
 import ar.unrn.tp.jpa.servicios.ServicioCliente;
 import ar.unrn.tp.jpa.servicios.ServicioDescuento;
+import ar.unrn.tp.jpa.servicios.CacheServiceJedis;
 import ar.unrn.tp.jpa.servicios.MyService;
 import ar.unrn.tp.jpa.servicios.ServicioProducto;
 import ar.unrn.tp.jpa.servicios.ServicioVenta;
@@ -51,9 +52,8 @@ public class MainServicioVenta {
 			System.out.println(e.getMessage());
 		}*/
 		
-		
-		
-		//PRUEBA DE CONCURRENCIA
+		/*
+		PRUEBA DE CONCURRENCIA
 		VentaService vs = new ServicioVenta("ORM");
 		
 		Map<Long, Integer> productos = new HashMap<Long, Integer>();
@@ -61,7 +61,18 @@ public class MainServicioVenta {
 		productos.put(8L, 2);
 		
 		vs.realizarVenta(1L, productos, 2L);
-	
+		*/
+		
+		//VentaService vs = new ServicioVenta("ORM", "localhost", 6379);
+		VentaService vs = new ServicioVenta("ORM", new CacheServiceJedis("localhost", 6379, "ventas"));
+		Map<Long, Integer> productos = new HashMap<Long, Integer>();
+		productos.put(7L, 1);
+		productos.put(8L, 2);
+		//vs.realizarVenta(1L, productos, 2L);
+		
+		for (Venta v : vs.ultimasTresVentas(1L)) {
+			System.out.println(v.toString());
+		}
 	}
 
 }

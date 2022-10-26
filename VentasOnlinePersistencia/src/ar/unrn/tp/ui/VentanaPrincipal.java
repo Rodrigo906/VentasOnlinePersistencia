@@ -13,6 +13,7 @@ import ar.unrn.tp.api.ClienteService;
 import ar.unrn.tp.api.DescuentoService;
 import ar.unrn.tp.api.ProductoService;
 import ar.unrn.tp.api.VentaService;
+import ar.unrn.tp.jpa.servicios.CacheServiceJedis;
 import ar.unrn.tp.jpa.servicios.ServicioCliente;
 import ar.unrn.tp.jpa.servicios.ServicioDescuento;
 import ar.unrn.tp.jpa.servicios.ServicioProducto;
@@ -59,9 +60,9 @@ public class VentanaPrincipal extends JFrame {
 					//String emf = "$objectdb/db/p2.odb";
 					String emf = "ORM";
 					
-					long idCliente = 1l;
+					long idCliente = 71l;
 					VentanaPrincipal frame = new VentanaPrincipal(new ServicioProducto(emf), new ServicioDescuento(emf), 
-							new ServicioCliente(emf), new ServicioVenta(emf), idCliente);
+							new ServicioCliente(emf), new ServicioVenta(emf, new CacheServiceJedis("localhost", 6379, "ventas")), idCliente);
 					frame.setVisible(true);
 					
 				} catch (Exception e) {

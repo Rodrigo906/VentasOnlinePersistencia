@@ -10,6 +10,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.LockModeType;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+
+import ar.unrn.tp.api.CacheService;
 import ar.unrn.tp.api.VentaService;
 import ar.unrn.tp.modelo.Carrito;
 import ar.unrn.tp.modelo.Cliente;
@@ -25,9 +27,11 @@ import ar.unrn.tp.servicio_tarjeta.VerificacionDeTarjetaWeb;
 public class ServicioVenta implements VentaService{
 
 	private EntityManagerFactory emf;
+	private CacheService serviceCache;
 
-	public ServicioVenta(String emf) {
+	public ServicioVenta(String emf, CacheService serviceCache) {
 		this.emf = Persistence.createEntityManagerFactory(emf);
+		this.serviceCache = serviceCache;
 	}
 	
 	@Override
@@ -61,7 +65,8 @@ public class ServicioVenta implements VentaService{
 			
 			Venta venta = carrito.realizarVenta(tarjeta, n.recuperarSiguiente());
 			em.persist(venta);
-			
+			this.serviceCache.registrarVenta(venta, idCliente);
+				
 			tx.commit();
 			} catch (Exception e) {
 				tx.rollback();
@@ -124,5 +129,32 @@ public class ServicioVenta implements VentaService{
 			}
 		return ventas;
 	}
-
+	
+	public List<Venta> ultimasTresVentas(long idCliente){
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		List<Venta> ventas  = new ArrayList<Venta>();
+		try {
+			tx.begin();
+			
+			ventas = this.serviceCache.obtenerVentas(idCliente);
+			if (ventas.isEmpty())
+				{
+					TypedQuery<Venta> q = em.createQuery("SELECT v FROM Venta v WHERE v.cliente.id = :idCliente ORDER BY v.fecha DESC", Venta.class)
+							.setMaxResults(3);
+					q.setParameter("idCliente", idCliente);
+					
+					ventas = q.getResultList();
+					this.serviceCache.cargarVentas(ventas, idCliente);
+				}
+			tx.commit();
+			} catch (Exception e) {
+				tx.rollback();
+				throw new RuntimeException(e);
+			} finally {
+				if (em != null && em.isOpen())
+				 em.close();
+			}
+		return ventas;
+	}
 }
